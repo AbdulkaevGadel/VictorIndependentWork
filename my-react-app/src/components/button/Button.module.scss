@@ -1,0 +1,20 @@
+@use '' as v;
+
+button {
+  border: none;
+  border-radius: 5px;
+  min-width: 100px;
+  font-size: 40px;
+  font-weight: bold;
+  background-color: v.$primary;
+
+
+  &:hover {
+    background-color: darken($primary, 40%);
+    cursor: pointer;
+  }
+  &:active {
+    transform: translateY(2px);
+    box-shadow: none;
+  }
+}
