@@ -1,4 +1,4 @@
-@use '' as v;
+@use '@styles/variables' as v;
 
 button {
   border: none;
@@ -10,7 +10,7 @@ button {
 
 
   &:hover {
-    background-color: darken($primary, 40%);
+    background-color: darken(v.$primary, 40%);
     cursor: pointer;
   }
   &:active {

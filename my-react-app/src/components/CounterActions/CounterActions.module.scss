@@ -1,10 +1,17 @@
 $primary: #63dbfd;
 
-.wrapper_button {
+.wrapper_button_one_element {
+  border: 3px solid $primary;
+  border-radius: 10px;
+  padding: 15px;
+  display: flex;
+  justify-content: center;
+}
+
+.wrapper_button_elements {
   border: 3px solid $primary;
   border-radius: 10px;
   padding: 15px;
   display: flex;
   justify-content: space-between;
-
 }
