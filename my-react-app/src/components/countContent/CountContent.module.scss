@@ -1,0 +1,15 @@
+@use '@styles/variables' as v;
+
+.normal {
+  font-size: 40px;
+  font-weight: bold;
+  color: v.$primary;
+}
+
+.maxCount{
+  color: red;
+}
+
+
+
+

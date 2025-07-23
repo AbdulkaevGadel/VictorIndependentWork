@@ -7,11 +7,12 @@ $primary: #63dbfd;
   padding: 20px;
   margin-top: 50px;
   margin-left: 50px;
+  color: $primary;
 
 }
 
 .main {
-  background-color: $primary;
+  border: 3px solid $primary;
   border-radius: 10px;
   min-width: 200px;
   min-height: 200px;

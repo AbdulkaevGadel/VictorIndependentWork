@@ -7,10 +7,8 @@ type CounterActionsProps = {
 
 export const CounterActions = ({children}: CounterActionsProps) => {
 
-    // Получаем количество детей
     const count = Children.count(children);
 
-    // Определяем класс в зависимости от количества элементов
     const wrapperClass = count === 1
         ? s.wrapper_button_one_element
         : s.wrapper_button_elements;
