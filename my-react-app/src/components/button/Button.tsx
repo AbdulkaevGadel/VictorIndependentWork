@@ -16,7 +16,7 @@ export const Button = (props: PropsButton) => {
                 onClick={() => {
                     props.onClick(props.count)
                 }}
-                disabled={props.disabled}>
+                disabled={props.count===undefined?false : props.disabled}>
             {props.title}
         </button>
     );

@@ -8,7 +8,7 @@ type CounterMainPanelProps = {
 
 export const CounterMainPanel = ({children}:CounterMainPanelProps) => {
     return (
-        <div className={s.main}>{children}</div>
+        <div className={s.mainCounter}>{children}</div>
     );
 };
 
