@@ -1,15 +1,30 @@
 @use '@styles/variables' as v;
 
 .counter {
-  max-width: 300px;
-  border: 3px solid v.$primary;
-  border-radius: 10px;
   padding: 20px;
-  margin-top: 50px;
-  margin-left: 50px;
-  color: v.$primary;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
 
 }
+
+input {
+  font-size: 40px;
+  font-weight: bold;
+  color: v.$primary;
+  background-color: #242424;
+  border: 3px solid v.$primary;
+  width: 100%;
+  text-align: center;
+  border-radius: 5px;
+  &:focus {
+    outline: 3px solid #7bacf8;
+    border-color: lighten(v.$primary, 10%);
+    box-shadow: 0 0 8px rgba(v.$primary, 0.4);
+  }
+
+}
+
 
 
 

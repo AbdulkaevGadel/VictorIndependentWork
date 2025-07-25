@@ -1,13 +1,29 @@
-$primary: #63dbfd;
+@use '@styles/variables' as v;
 
-.mainCounter {
-  border: 3px solid $primary;
+.mainCounterOneElement {
+  border: 3px solid v.$primary;
   border-radius: 10px;
-  min-width: 200px;
   min-height: 200px;
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-bottom: 20px;
+  height: 100%;
+
+  span {
+    font-size: 100px;
+    font-weight: bold;
+  }
+
+
+}
+
+.mainCounterElements {
+  border: 3px solid v.$primary;
+  border-radius: 10px;
+  min-height: 200px;
+  display: flex;
+  flex-direction: column;
   margin-bottom: 20px;
 
   span {
@@ -15,8 +31,5 @@ $primary: #63dbfd;
     font-weight: bold;
   }
 
-  .maxCount{
-    color: red;
-  }
 
 }

@@ -1,48 +1,10 @@
 $primary: #63dbfd;
 
 .appMain {
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));;
+  padding: 50px 50px;
+  gap: 50px;
 }
 
-
-.counter {
-  max-width: 300px;
-  border: 3px solid $primary;
-  border-radius: 10px;
-  padding: 20px;
-  margin-top: 50px;
-  margin-left: 50px;
-  color: $primary;
-
-}
-
-.main {
-  border: 3px solid $primary;
-  border-radius: 10px;
-  min-width: 200px;
-  min-height: 200px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-bottom: 20px;
-
-  span {
-    font-size: 40px;
-    font-weight: bold;
-  }
-
-  .maxCount{
-    color: red;
-  }
-
-}
-
-.wrapper_button {
-  border: 3px solid $primary;
-  border-radius: 10px;
-  padding: 15px;
-  display: flex;
-  justify-content: space-between;
-
-}
 
