@@ -40,12 +40,8 @@ export const SettingCounter = (props: SettingCounterPropsType) => {
     return (
         <div className={s.settingCounter}>
             <CounterMainPanel>
-                <CounterSettingsField onChangeHandlerValue={() => {
-                    onChangeHandlerMaxValue(props.maxValue)
-                }} valueInput={props.maxValue} title={'max value:'}/>
-                <CounterSettingsField onChangeHandlerValue={() => {
-                    onChangeHandlerStartValue(props.startValue)
-                }} valueInput={props.startValue} title={'start value: '}/>
+                <CounterSettingsField maxValue={props.maxValue} valueInput={props.maxValue} title={'max value:'}/>
+                <CounterSettingsField  startValue={props.startValue} valueInput={props.startValue} title={'start value:'}/>
             </CounterMainPanel>
             <CounterActions>
                 <Button title={'set'} onClick={saveCounterSettings} disabled={props.count > 4}/>
