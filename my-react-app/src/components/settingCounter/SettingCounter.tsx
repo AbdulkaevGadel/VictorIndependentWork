@@ -3,48 +3,59 @@ import {CounterActions} from "../counterActions/CounterActions.tsx";
 import {Button} from "../button/Button.tsx";
 import {CounterSettingsField} from "../counterSettingsField/CounterSettingsField.tsx";
 import s from "./SettingCounter.module.scss"
-import type {Dispatch, SetStateAction} from "react";
+import {type Dispatch, type SetStateAction, useState} from "react";
 import type {CountSettingsType} from "../../App.tsx";
 
 type SettingCounterPropsType = {
-    count: number
+    count: string
     maxValue: number
     startValue: number
     setCountSettings: Dispatch<SetStateAction<CountSettingsType>>
+    setCount: Dispatch<SetStateAction<string>>
 }
 
 
 export const SettingCounter = (props: SettingCounterPropsType) => {
 
+    const [valueMaxInput,setValueMaxInput]=useState(props.maxValue)
+    const [valueStartInput,setValueStartInput]=useState(props.startValue)
+
     const saveCounterSettings = () => {
-
-    }
-
-    const onChangeHandlerMaxValue = (value:number) => {
-        console.log(1)
-        console.log(value)
         props.setCountSettings(prev => ({
             ...prev,
-            maxValue: value
+            maxValue: valueMaxInput,
+            startValue:valueStartInput
         }));
-    }
-    const onChangeHandlerStartValue = (value:number) =>{
-
-        props.setCountSettings(prev => ({
-            ...prev,
-            startValue: value
-        }));
+        props.setCount(String(valueStartInput))
     }
 
+    console.log(` это стэйт ${props.maxValue}`)
 
+    // const onChangeHandlerMaxValue = (value:number) => {
+    //     // console.log(1)
+    //     // console.log(value)
+    //     props.setCountSettings(prev => ({
+    //         ...prev,
+    //         maxValue: value
+    //     }));
+    // }
+    // const onChangeHandlerStartValue = (value:number) =>{
+    //
+    //     props.setCountSettings(prev => ({
+    //         ...prev,
+    //         startValue: value
+    //     }));
+    // }
+
+    console.log(`valueMAx: ${valueMaxInput} valueStart: ${valueStartInput}`)
     return (
         <div className={s.settingCounter}>
             <CounterMainPanel>
-                <CounterSettingsField maxValue={props.maxValue} valueInput={props.maxValue} title={'max value:'}/>
-                <CounterSettingsField  startValue={props.startValue} valueInput={props.startValue} title={'start value:'}/>
+                <CounterSettingsField setValueMaxInput={setValueMaxInput} maxValue={props.maxValue} valueInput={props.maxValue} title={'max value:'}/>
+                <CounterSettingsField setValueStartInput={setValueStartInput} startValue={props.startValue} valueInput={props.startValue} title={'start value:'}/>
             </CounterMainPanel>
             <CounterActions>
-                <Button title={'set'} onClick={saveCounterSettings} disabled={props.count > 4}/>
+                <Button title={'set'} onClick={saveCounterSettings} disabled={false}/>
             </CounterActions>
         </div>
     );

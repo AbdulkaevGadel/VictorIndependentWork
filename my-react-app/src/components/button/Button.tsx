@@ -2,7 +2,7 @@ import s from './Button.module.scss'
 
 
 type PropsButton = {
-    count?: number
+    count?:string
     title: string
     onClick: (count?: number) => void
     disabled: boolean
@@ -14,9 +14,9 @@ export const Button = (props: PropsButton) => {
     return (
         <button className={s.b}
                 onClick={() => {
-                    props.onClick(props.count)
+                    props.onClick()
                 }}
-                disabled={props.count===undefined?false : props.disabled}>
+                disabled={props.disabled}>
             {props.title}
         </button>
     );

@@ -1,13 +1,13 @@
 import s from "./CountContent.module.scss";
 
 type PropsCountContent = {
-    count:number
+    count:string
     maxValue:number
 }
 
 
 export const CountContent = (props:PropsCountContent) => {
     return (
-        <span className={props.count > props.maxValue ? s.maxCount : s.normal}>{props.count}</span>
+        <span className={Number(props.count) > props.maxValue -1 ? s.maxCount : s.normal}>{props.count}</span>
     );
 };

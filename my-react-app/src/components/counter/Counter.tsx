@@ -7,19 +7,21 @@ import {Button} from "../button/Button.tsx";
 
 
 type CounterMainPanelProps = {
-    count: number
+    count: string
     maxValue: number
-    setCount: Dispatch<SetStateAction<number>>
+    startValue: number
+    setCount: Dispatch<SetStateAction<string>>
 }
 
 export const Counter = (props: CounterMainPanelProps) => {
 
     const handleIncrement = () => {
-        props.setCount(props.count + 1)
+        const newCount= Number(props.count) + 1;
+        props.setCount( String(newCount))
     }
 
     const resetCounter = () => {
-        props.setCount(0)
+        props.setCount(String(props.startValue))
     }
 
 
@@ -29,8 +31,8 @@ export const Counter = (props: CounterMainPanelProps) => {
                 <CountContent count={props.count} maxValue={props.maxValue}/>
             </CounterMainPanel>
             <CounterActions>
-                <Button count={props.count} title={'inc'} onClick={handleIncrement} disabled={props.count > 4}/>
-                <Button title={'reset'} onClick={resetCounter} disabled={props.count == 0}/>
+                <Button count={props.count} title={'inc'} onClick={handleIncrement} disabled={Number(props.count )> props.maxValue - 1}/>
+                <Button title={'reset'} onClick={resetCounter} disabled={Number(props.count) === 0}/>
             </CounterActions>
         </div>
     );

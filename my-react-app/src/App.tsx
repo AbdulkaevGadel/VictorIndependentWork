@@ -10,7 +10,7 @@ export type CountSettingsType = {
 }
 
 function App() {
-    const [count, setCount] = useState(0)
+    const [count, setCount] = useState('0')
     const [countSettings, setCountSettings] = useState<CountSettingsType>({
         maxValue: 4,
         startValue: 0
@@ -20,8 +20,9 @@ function App() {
 
     return (
         <div className={s.appMain}>
-            <SettingCounter setCountSettings={setCountSettings} count={count} maxValue={countSettings.maxValue} startValue={countSettings.startValue}/>
-            <Counter count={count} setCount={setCount} maxValue={countSettings.maxValue}/>
+            <SettingCounter setCountSettings={setCountSettings} count={count} setCount={setCount}
+                            maxValue={countSettings.maxValue} startValue={countSettings.startValue}/>
+            <Counter count={count} setCount={setCount} maxValue={countSettings.maxValue} startValue={countSettings.startValue}/>
         </div>
     )
 }

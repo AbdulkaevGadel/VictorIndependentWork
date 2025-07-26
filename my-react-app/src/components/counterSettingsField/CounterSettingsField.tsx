@@ -1,11 +1,13 @@
 import s from "./CounterSettingsField.module.scss"
-import React, {useState} from "react";
+import React, {type Dispatch, type SetStateAction, useState} from "react";
 
 type CounterSettingsFieldPropsType = {
     title: string,
     valueInput: number,
     maxValue?: number
     startValue?: number
+    setValueMaxInput?:Dispatch<SetStateAction<number>>
+    setValueStartInput?:Dispatch<SetStateAction<number>>
     // onChangeHandlerValue: (value: number) => void,
 }
 
@@ -13,26 +15,22 @@ type CounterSettingsFieldPropsType = {
 export const CounterSettingsField = (props: CounterSettingsFieldPropsType) => {
 
     const [valueInput,setValueInput]=useState(props.valueInput)
-    const [valueMaxInput,setValueMaxInput]=useState(props.maxValue)
-    const [valueStartInput,setValueStartInput]=useState(props.startValue)
+
 
     const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
         if(e.target.name==='max value:'){
             setValueInput(Number(e.target.value))
-            setValueMaxInput(Number(valueInput+1))
+            props.setValueMaxInput?.(Number(e.target.value))
         }
         if(e.target.name==='start value:'){
             setValueInput(Number(e.target.value))
-            setValueStartInput(Number(valueInput+1))
+            props.setValueStartInput?.(Number(e.target.value))
         }
-        console.log(`value: ${valueInput}`)
-        console.log(`valueMAx: ${valueMaxInput}`)
-        console.log(`valueStart: ${valueStartInput}`)
+
     }
 
-    console.log(valueInput)
-    console.log(valueMaxInput)
-    console.log(valueStartInput)
+    console.log(`value: ${valueInput}`)
+
 
     return (
         <div className={s.counter}>
