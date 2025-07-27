@@ -59,17 +59,19 @@ export const CounterSettingsField = (props: CounterSettingsFieldPropsType) => {
         if(0 <= Number(e.target.value)){
             props.setCount(enterValue)
         }
+
+        if (
+            props.valueMaxInput > 0 &&
+            props.valueStartInput > 0 &&
+            props.valueMaxInput > props.valueStartInput
+        ) {
+            props.setCount(enterValue);
+        }
+
     }
 
     if(props.valueMaxInput <= props.valueStartInput|| props.valueStartInput < 0 ){
         props.setCount(incorrectValue)
-    }
-    if (
-        props.valueMaxInput > 0 &&
-        props.valueStartInput > 0 &&
-        props.valueMaxInput > props.valueStartInput
-    ) {
-        props.setCount(enterValue);
     }
 
     const saveOnExitFromInput = (e:React.ChangeEvent<HTMLInputElement>) =>{
@@ -79,15 +81,10 @@ export const CounterSettingsField = (props: CounterSettingsFieldPropsType) => {
         props.setIsClickedButtonSet(true)
     }
 
-
-
     const conditionOne = (valueInput) < 0
     const conditionTwo = props.valueMaxInput <=  props.valueStartInput
 
-
-
     const wrapperClass = conditionOne||conditionTwo?s.errorInput:''
-
 
 
     return (
