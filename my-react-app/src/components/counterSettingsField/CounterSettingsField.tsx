@@ -24,14 +24,16 @@ export const CounterSettingsField = (props: CounterSettingsFieldPropsType) => {
     const [valueInput,setValueInput]=useState(props.valueInput)
 
     const incorrectValue:string='Incorrect value!'
+    const enterValue:string = 'Enter value and press "set"'
 
     const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
         if(Number(e.target.value) >0){
             props.setFlagDisabledButton(false)
-
+            props.setCount(enterValue)
         }
         if(0<=props.intermediateValueStartInput){
             props.setFlagDisabledButton(false)
+            props.setCount(enterValue)
         }
         if((Number(e.target.value)<0)||props.intermediateValueStartInput<0){
             props.setFlagDisabledButton(true)
@@ -49,15 +51,19 @@ export const CounterSettingsField = (props: CounterSettingsFieldPropsType) => {
             if(0<=(Number(e.target.value))){
                 props.setIntermediateValueStartInput(Number(e.target.value))
                 props.setFlagDisabledButton(false)
+                props.setCount(enterValue)
             }
         }
         if(e.target.name==='max value:' && props.intermediateValueStartInput <0 ){
             props.setFlagDisabledButton(true)
             props.setCount(incorrectValue)
         }
-        if( props.valueMaxInput <= props.valueStartInput){
+        if( props.valueMaxInput <= props.valueStartInput&& props.valueStartInput >0){
             props.setCount(incorrectValue)
         }
+        // if(props.valueStartInput <= props.valueMaxInput){
+        //     props.setCount(enterValue)
+        // }
 
 
 
@@ -75,6 +81,7 @@ export const CounterSettingsField = (props: CounterSettingsFieldPropsType) => {
         if (e.target.name==='start value:'){
             props.setIntermediateValueStartInput(Number(e.target.value))
         }
+
     }
 
 
