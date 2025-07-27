@@ -23,19 +23,24 @@ export const CounterSettingsField = (props: CounterSettingsFieldPropsType) => {
 
     const [valueInput,setValueInput]=useState(props.valueInput)
 
+    const incorrectValue:string='Incorrect value!'
+
     const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
         if(Number(e.target.value) >0){
             props.setFlagDisabledButton(false)
+
         }
         if(0<=props.intermediateValueStartInput){
             props.setFlagDisabledButton(false)
         }
         if((Number(e.target.value)<0)||props.intermediateValueStartInput<0){
             props.setFlagDisabledButton(true)
+            props.setCount(incorrectValue)
         }
         if(e.target.name==='max value:'){
             setValueInput(Number(e.target.value))
             props.setValueMaxInput?.(Number(e.target.value))
+
 
         }
         if(e.target.name==='start value:'){
@@ -48,7 +53,22 @@ export const CounterSettingsField = (props: CounterSettingsFieldPropsType) => {
         }
         if(e.target.name==='max value:' && props.intermediateValueStartInput <0 ){
             props.setFlagDisabledButton(true)
+            props.setCount(incorrectValue)
         }
+        if( props.valueMaxInput <= props.valueStartInput){
+            props.setCount(incorrectValue)
+        }
+
+
+
+    }
+
+    console.log(props.valueMaxInput)
+    console.log(props.valueStartInput)
+
+    if(props.valueMaxInput <= props.valueStartInput){
+        console.log('srabotalo')
+        props.setCount(incorrectValue)
     }
 
     const saveOnExitFromInput = (e:React.ChangeEvent<HTMLInputElement>) =>{
