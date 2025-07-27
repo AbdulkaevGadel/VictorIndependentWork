@@ -17,7 +17,6 @@ type PropsButton = {
 export const Button = (props: PropsButton) => {
 
     const onClickHandler = () =>{
-        console.log(props.valueStartInput)
         props.onClick()
         props.setIsClickedButtonSet?.(false)
         props.setCount?.(String(props.valueStartInput))
