@@ -12,6 +12,8 @@ type SettingCounterPropsType = {
     startValue: number
     setCountSettings: Dispatch<SetStateAction<CountSettingsType>>
     setCount: Dispatch<SetStateAction<string>>
+    isClickedButtonSet:boolean
+    setIsClickedButtonSet:Dispatch<SetStateAction<boolean>>
 }
 
 
@@ -41,15 +43,20 @@ export const SettingCounter = (props: SettingCounterPropsType) => {
                                       startValue={props.startValue} flagDisabledButton={flagDisabledButton}
                                       setFlagDisabledButton={setFlagDisabledButton}
                                       intermediateValueStartInput={intermediateValueStartInput}
-                                      setIntermediateValueStartInput={setIntermediateValueStartInput} title={'max value:'}/>
+                                      setIntermediateValueStartInput={setIntermediateValueStartInput} title={'max value:'}
+                                      setIsClickedButtonSet={props.setIsClickedButtonSet}/>
                 <CounterSettingsField valueInput={valueStartInput} setValueStartInput={setValueStartInput} valueStartInput={valueStartInput}
                                       valueMaxInput={valueMaxInput} startValue={props.startValue} flagDisabledButton={flagDisabledButton}
-                                      setFlagDisabledButton={setFlagDisabledButton} setCount={props.setCount}
+                                      setFlagDisabledButton={setFlagDisabledButton} setCount={props.setCount} count={props.count}
                                       intermediateValueStartInput={intermediateValueStartInput}
-                                      setIntermediateValueStartInput={setIntermediateValueStartInput} title={'start value:'} />
+                                      setIntermediateValueStartInput={setIntermediateValueStartInput} title={'start value:'}
+                                      setIsClickedButtonSet={props.setIsClickedButtonSet}/>
             </CounterMainPanel>
             <CounterActions>
-                <Button title={'set'} onClick={saveCounterSettings} disabled={flagDisabledButton || valueMaxInput <= valueStartInput} />
+                <Button isClickedButtonSet={props.isClickedButtonSet} setIsClickedButtonSet={props.setIsClickedButtonSet}
+                        title={'set'} onClick={saveCounterSettings}
+                        disabled={flagDisabledButton || valueMaxInput <= valueStartInput}
+                        setCount={props.setCount} valueStartInput={valueStartInput}/>
             </CounterActions>
         </div>
     );

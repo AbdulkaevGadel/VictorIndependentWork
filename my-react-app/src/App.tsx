@@ -15,14 +15,17 @@ function App() {
         maxValue: 4,
         startValue: 0
     })
+    const [isClickedButtonSet, setIsClickedButtonSet] = useState(false)
 
 
 
     return (
         <div className={s.appMain}>
             <SettingCounter setCountSettings={setCountSettings} count={count} setCount={setCount}
-                            maxValue={countSettings.maxValue} startValue={countSettings.startValue}/>
-            <Counter count={count} setCount={setCount} maxValue={countSettings.maxValue} startValue={countSettings.startValue}/>
+                            maxValue={countSettings.maxValue} startValue={countSettings.startValue}
+                            isClickedButtonSet={isClickedButtonSet} setIsClickedButtonSet={setIsClickedButtonSet}/>
+            <Counter count={count} setCount={setCount} maxValue={countSettings.maxValue} startValue={countSettings.startValue}
+                     isClickedButtonSet={isClickedButtonSet}/>
         </div>
     )
 }

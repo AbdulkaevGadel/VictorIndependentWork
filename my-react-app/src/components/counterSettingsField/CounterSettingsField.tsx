@@ -12,10 +12,11 @@ type CounterSettingsFieldPropsType = {
     setValueStartInput?:Dispatch<SetStateAction<number>>
     setFlagDisabledButton:Dispatch<SetStateAction<boolean>>
     setCount: Dispatch<SetStateAction<string>>
+    count?:string
     flagDisabledButton:boolean
     intermediateValueStartInput:number
     setIntermediateValueStartInput:Dispatch<SetStateAction<number>>
-    // onChangeHandlerValue: (value: number) => void,
+    setIsClickedButtonSet:Dispatch<SetStateAction<boolean>>
 }
 
 
@@ -27,61 +28,55 @@ export const CounterSettingsField = (props: CounterSettingsFieldPropsType) => {
     const enterValue:string = 'Enter value and press "set"'
 
     const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-        if(Number(e.target.value) >0){
+        props.setIsClickedButtonSet(true)
+        if((Number(e.target.value)) >0&&props.flagDisabledButton){
             props.setFlagDisabledButton(false)
-            props.setCount(enterValue)
         }
-        if(0<=props.intermediateValueStartInput){
+        if(0<=props.intermediateValueStartInput&&props.flagDisabledButton){
             props.setFlagDisabledButton(false)
-            props.setCount(enterValue)
         }
         if((Number(e.target.value)<0)||props.intermediateValueStartInput<0){
             props.setFlagDisabledButton(true)
-            props.setCount(incorrectValue)
         }
         if(e.target.name==='max value:'){
             setValueInput(Number(e.target.value))
             props.setValueMaxInput?.(Number(e.target.value))
-
-
         }
         if(e.target.name==='start value:'){
+            if(Number(e.target.value) <0){
+                props.setCount(incorrectValue)
+            }
             setValueInput(Number(e.target.value))
             props.setValueStartInput?.(Number(e.target.value))
-            if(0<=(Number(e.target.value))){
+            if(0<=(Number(e.target.value))&&props.flagDisabledButton){
                 props.setIntermediateValueStartInput(Number(e.target.value))
                 props.setFlagDisabledButton(false)
-                props.setCount(enterValue)
             }
         }
         if(e.target.name==='max value:' && props.intermediateValueStartInput <0 ){
             props.setFlagDisabledButton(true)
-            props.setCount(incorrectValue)
         }
-        if( props.valueMaxInput <= props.valueStartInput&& props.valueStartInput >0){
-            props.setCount(incorrectValue)
+        if(0 <= Number(e.target.value)){
+            props.setCount(enterValue)
         }
-        // if(props.valueStartInput <= props.valueMaxInput){
-        //     props.setCount(enterValue)
-        // }
-
-
-
     }
 
-    console.log(props.valueMaxInput)
-    console.log(props.valueStartInput)
-
-    if(props.valueMaxInput <= props.valueStartInput){
-        console.log('srabotalo')
+    if(props.valueMaxInput <= props.valueStartInput|| props.valueStartInput < 0 ){
         props.setCount(incorrectValue)
+    }
+    if (
+        props.valueMaxInput > 0 &&
+        props.valueStartInput > 0 &&
+        props.valueMaxInput > props.valueStartInput
+    ) {
+        props.setCount(enterValue);
     }
 
     const saveOnExitFromInput = (e:React.ChangeEvent<HTMLInputElement>) =>{
         if (e.target.name==='start value:'){
             props.setIntermediateValueStartInput(Number(e.target.value))
         }
-
+        props.setIsClickedButtonSet(true)
     }
 
 
