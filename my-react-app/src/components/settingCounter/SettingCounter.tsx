@@ -20,7 +20,7 @@ export const SettingCounter = (props: SettingCounterPropsType) => {
     const [valueMaxInput,setValueMaxInput]=useState(props.maxValue)
     const [valueStartInput,setValueStartInput]=useState(props.startValue)
     const [flagDisabledButton,setFlagDisabledButton]=useState(false)
-    const [v1,setV1]=useState(0)
+    const [intermediateValueStartInput,setIntermediateValueStartInput]=useState(0)
 
     const saveCounterSettings = () => {
         props.setCountSettings(prev => ({
@@ -32,20 +32,21 @@ export const SettingCounter = (props: SettingCounterPropsType) => {
     }
 
 
-    // console.log(flagDisabledButton)
-    // console.log(` это стэйт ${props.maxValue}`)
-    // console.log(`valueMAx: ${valueMaxInput} valueStart: ${valueStartInput}`)
     return (
         <div className={s.settingCounter}>
             <CounterMainPanel>
-                <CounterSettingsField valueInput={valueMaxInput} setValueMaxInput={setValueMaxInput} valueStartInput={valueStartInput}
-                                      valueMaxInput={valueMaxInput} maxValue={props.maxValue} setCount={props.setCount}
-                                      startValue={props.startValue} flagDisabledButton={flagDisabledButton} setFlagDisabledButton={setFlagDisabledButton}
-                                      v1={v1} setV1={setV1} title={'max value:'}/>
+                <CounterSettingsField valueInput={valueMaxInput} setValueMaxInput={setValueMaxInput}
+                                      valueStartInput={valueStartInput} valueMaxInput={valueMaxInput}
+                                      maxValue={props.maxValue} setCount={props.setCount}
+                                      startValue={props.startValue} flagDisabledButton={flagDisabledButton}
+                                      setFlagDisabledButton={setFlagDisabledButton}
+                                      intermediateValueStartInput={intermediateValueStartInput}
+                                      setIntermediateValueStartInput={setIntermediateValueStartInput} title={'max value:'}/>
                 <CounterSettingsField valueInput={valueStartInput} setValueStartInput={setValueStartInput} valueStartInput={valueStartInput}
                                       valueMaxInput={valueMaxInput} startValue={props.startValue} flagDisabledButton={flagDisabledButton}
                                       setFlagDisabledButton={setFlagDisabledButton} setCount={props.setCount}
-                                      v1={v1} setV1={setV1} title={'start value:'} />
+                                      intermediateValueStartInput={intermediateValueStartInput}
+                                      setIntermediateValueStartInput={setIntermediateValueStartInput} title={'start value:'} />
             </CounterMainPanel>
             <CounterActions>
                 <Button title={'set'} onClick={saveCounterSettings} disabled={flagDisabledButton || valueMaxInput <= valueStartInput} />

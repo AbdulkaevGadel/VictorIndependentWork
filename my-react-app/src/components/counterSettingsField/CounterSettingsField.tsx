@@ -13,8 +13,8 @@ type CounterSettingsFieldPropsType = {
     setFlagDisabledButton:Dispatch<SetStateAction<boolean>>
     setCount: Dispatch<SetStateAction<string>>
     flagDisabledButton:boolean
-    v1:number
-    setV1:Dispatch<SetStateAction<number>>
+    intermediateValueStartInput:number
+    setIntermediateValueStartInput:Dispatch<SetStateAction<number>>
     // onChangeHandlerValue: (value: number) => void,
 }
 
@@ -27,10 +27,10 @@ export const CounterSettingsField = (props: CounterSettingsFieldPropsType) => {
         if(Number(e.target.value) >0){
             props.setFlagDisabledButton(false)
         }
-        if(0<=props.v1){
+        if(0<=props.intermediateValueStartInput){
             props.setFlagDisabledButton(false)
         }
-        if((Number(e.target.value)<0)||props.v1<0){
+        if((Number(e.target.value)<0)||props.intermediateValueStartInput<0){
             props.setFlagDisabledButton(true)
         }
         if(e.target.name==='max value:'){
@@ -42,20 +42,18 @@ export const CounterSettingsField = (props: CounterSettingsFieldPropsType) => {
             setValueInput(Number(e.target.value))
             props.setValueStartInput?.(Number(e.target.value))
             if(0<=(Number(e.target.value))){
-                props.setV1(Number(e.target.value))
+                props.setIntermediateValueStartInput(Number(e.target.value))
                 props.setFlagDisabledButton(false)
             }
-            // setV2(0<= props.valueStartInput? props.valueStartInput -1:props.valueStartInput+1)
         }
-        if(e.target.name==='max value:' && props.v1 <0 ){
+        if(e.target.name==='max value:' && props.intermediateValueStartInput <0 ){
             props.setFlagDisabledButton(true)
         }
-
     }
 
-    const test = (e:React.ChangeEvent<HTMLInputElement>) =>{
+    const saveOnExitFromInput = (e:React.ChangeEvent<HTMLInputElement>) =>{
         if (e.target.name==='start value:'){
-            props.setV1(Number(e.target.value))
+            props.setIntermediateValueStartInput(Number(e.target.value))
         }
     }
 
@@ -76,7 +74,7 @@ export const CounterSettingsField = (props: CounterSettingsFieldPropsType) => {
             <input
                 className={wrapperClass}
                 type="number" name={props.title} value={valueInput} onChange={onChangeHandler}
-                onBlur={test}
+                onBlur={saveOnExitFromInput}
             />
         </div>
     );
