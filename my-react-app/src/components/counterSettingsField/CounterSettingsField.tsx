@@ -1,5 +1,5 @@
 import s from "./CounterSettingsField.module.scss"
-import React, {type Dispatch, type SetStateAction, useState} from "react";
+import React, {type Dispatch, type SetStateAction, useLayoutEffect, useState} from "react";
 
 type CounterSettingsFieldPropsType = {
     title: string,
@@ -68,11 +68,15 @@ export const CounterSettingsField = (props: CounterSettingsFieldPropsType) => {
             props.setCount(enterValue);
         }
 
+
     }
 
-    if (props.valueMaxInput <= props.valueStartInput || props.valueStartInput < 0) {
-        props.setCount(incorrectValue)
-    }
+    useLayoutEffect(() => {
+        if (props.valueMaxInput <= props.valueStartInput || props.valueStartInput < 0) {
+            props.setCount(incorrectValue)
+        }
+    }, [props.valueMaxInput, props.valueStartInput, props.valueStartInput]);
+
 
     const saveOnExitFromInput = (e: React.ChangeEvent<HTMLInputElement>) => {
         if (e.target.name === 'start value:') {

@@ -15,6 +15,8 @@ function App() {
         maxValue: 4,
         startValue: 0
     })
+
+
     const [isClickedButtonSet, setIsClickedButtonSet] = useState(false)
 
 
