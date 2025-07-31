@@ -1,4 +1,4 @@
-import {useState} from 'react'
+import {useLayoutEffect, useState} from 'react'
 import {Counter} from "./components/counter/Counter.tsx";
 import {SettingCounter} from "./components/settingCounter/SettingCounter.tsx";
 import s from "./App.module.scss"
@@ -16,6 +16,10 @@ function App() {
         maxValue: 4,
         startValue: 0
     })
+
+    useLayoutEffect(() => {
+        setCount(String(countSettings.startValue))
+    }, [countSettings.startValue]);
 
 
     const [isClickedButtonSet, setIsClickedButtonSet] = useState(false)
