@@ -3,7 +3,7 @@ import {CounterActions} from "../counterActions/CounterActions.tsx";
 import {Button} from "../button/Button.tsx";
 import {CounterSettingsField} from "../counterSettingsField/CounterSettingsField.tsx";
 import s from "./SettingCounter.module.scss"
-import {type Dispatch, type SetStateAction, useState} from "react";
+import React, {type Dispatch, type SetStateAction, useLayoutEffect, useState} from "react";
 import type {CountSettingsType} from "../../App.tsx";
 
 type SettingCounterPropsType = {
@@ -22,7 +22,6 @@ export const SettingCounter = (props: SettingCounterPropsType) => {
     const [valueMaxInput,setValueMaxInput]=useState(props.maxValue)
     const [valueStartInput,setValueStartInput]=useState(props.startValue)
     const [flagDisabledButton,setFlagDisabledButton]=useState(false)
-    const [intermediateValueStartInput,setIntermediateValueStartInput]=useState(0)
 
     const saveCounterSettings = () => {
         props.setCountSettings(prev => ({
@@ -33,6 +32,29 @@ export const SettingCounter = (props: SettingCounterPropsType) => {
         props.setCount(String(valueStartInput))
     }
 
+    useLayoutEffect(() => {
+        if(valueMaxInput <= valueStartInput){
+            setFlagDisabledButton(true)
+        }
+    }, [valueMaxInput, valueStartInput]);
+
+
+
+    console.log(flagDisabledButton, valueMaxInput <= valueStartInput)
+
+    const onChangeHandlerMaxValue = (e:React.ChangeEvent<HTMLInputElement>) => {
+        if(Number(e.target.value) <= 0 ){
+            setFlagDisabledButton(true)
+        }
+        else setFlagDisabledButton(false)
+    }
+
+    const onChangeHandlerStartValue = (e:React.ChangeEvent<HTMLInputElement>) =>{
+        if(Number(e.target.value) <0) {
+            setFlagDisabledButton(true)
+        }
+        else setFlagDisabledButton(false)
+    }
 
     return (
         <div className={s.settingCounter}>
@@ -42,14 +64,14 @@ export const SettingCounter = (props: SettingCounterPropsType) => {
                                       maxValue={props.maxValue} setCount={props.setCount}
                                       startValue={props.startValue} flagDisabledButton={flagDisabledButton}
                                       setFlagDisabledButton={setFlagDisabledButton}
-                                      intermediateValueStartInput={intermediateValueStartInput}
-                                      setIntermediateValueStartInput={setIntermediateValueStartInput} title={'max value:'}
+                                      onChangeHandlerMaxValue ={onChangeHandlerMaxValue}
+                                      title={'max value:'}
                                       setIsClickedButtonSet={props.setIsClickedButtonSet}/>
                 <CounterSettingsField valueInput={valueStartInput} setValueStartInput={setValueStartInput} valueStartInput={valueStartInput}
                                       valueMaxInput={valueMaxInput} startValue={props.startValue} flagDisabledButton={flagDisabledButton}
                                       setFlagDisabledButton={setFlagDisabledButton} setCount={props.setCount} count={props.count}
-                                      intermediateValueStartInput={intermediateValueStartInput}
-                                      setIntermediateValueStartInput={setIntermediateValueStartInput} title={'start value:'}
+                                      onChangeHandlerStartValue={onChangeHandlerStartValue}
+                                      title={'start value:'}
                                       setIsClickedButtonSet={props.setIsClickedButtonSet}/>
             </CounterMainPanel>
             <CounterActions>

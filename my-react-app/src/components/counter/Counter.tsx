@@ -34,7 +34,7 @@ export const Counter = (props: CounterMainPanelProps) => {
             <CounterActions>
                 <Button count={props.count} title={'inc'} onClick={handleIncrement}
                         disabled={Number(props.count )> props.maxValue - 1 ||props.isClickedButtonSet}/>
-                <Button title={'reset'} onClick={resetCounter} disabled={Number(props.count) === 0||props.isClickedButtonSet}/>
+                <Button title={'reset'} onClick={resetCounter} disabled={Number(props.count) === props.startValue||props.isClickedButtonSet}/>
             </CounterActions>
         </div>
     );

@@ -1,5 +1,5 @@
 import s from "./CounterSettingsField.module.scss"
-import React, {type Dispatch, type SetStateAction, useLayoutEffect, useState} from "react";
+import React, {type Dispatch, type SetStateAction, useLayoutEffect} from "react";
 
 type CounterSettingsFieldPropsType = {
     title: string,
@@ -14,62 +14,37 @@ type CounterSettingsFieldPropsType = {
     setCount: Dispatch<SetStateAction<string>>
     count?: string
     flagDisabledButton: boolean
-    intermediateValueStartInput: number
-    setIntermediateValueStartInput: Dispatch<SetStateAction<number>>
+    intermediateValueStartInput?: number
+    setIntermediateValueStartInput?: Dispatch<SetStateAction<number>>
     setIsClickedButtonSet: Dispatch<SetStateAction<boolean>>
+    onChangeHandlerStartValue?: (e: React.ChangeEvent<HTMLInputElement>) => void
+    onChangeHandlerMaxValue?: (e: React.ChangeEvent<HTMLInputElement>) => void
 }
 
 
 export const CounterSettingsField = (props: CounterSettingsFieldPropsType) => {
 
-    const [valueInput, setValueInput] = useState(props.valueInput)
+    // const [valueInput, setValueInput] = useState(props.valueInput)
 
     const incorrectValue: string = 'Incorrect value!'
     const enterValue: string = 'Enter value and press "set"'
 
     const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-        props.setIsClickedButtonSet(true)
-        if ((Number(e.target.value)) > 0 && props.flagDisabledButton) {
-            props.setFlagDisabledButton(false)
-        }
-        if (0 <= props.intermediateValueStartInput && props.flagDisabledButton) {
-            props.setFlagDisabledButton(false)
-        }
-        if ((Number(e.target.value) < 0) || props.intermediateValueStartInput < 0) {
-            props.setFlagDisabledButton(true)
-        }
+
         if (e.target.name === 'max value:') {
-            setValueInput(Number(e.target.value))
             props.setValueMaxInput?.(Number(e.target.value))
+            props.onChangeHandlerMaxValue?.(e)
         }
+
         if (e.target.name === 'start value:') {
-            if (Number(e.target.value) < 0) {
-                props.setCount(incorrectValue)
-            }
-            setValueInput(Number(e.target.value))
             props.setValueStartInput?.(Number(e.target.value))
-            if (0 <= (Number(e.target.value)) && props.flagDisabledButton) {
-                props.setIntermediateValueStartInput(Number(e.target.value))
-                props.setFlagDisabledButton(false)
-            }
+            props.onChangeHandlerStartValue?.(e)
         }
-        if (e.target.name === 'max value:' && props.intermediateValueStartInput < 0) {
-            props.setFlagDisabledButton(true)
-        }
-        if (0 <= Number(e.target.value)) {
-            props.setCount(enterValue)
-        }
-
-        if (
-            props.valueMaxInput > 0 &&
-            props.valueStartInput > 0 &&
-            props.valueMaxInput > props.valueStartInput
-        ) {
-            props.setCount(enterValue);
-        }
-
 
     }
+
+
+
 
     useLayoutEffect(() => {
         if (props.valueMaxInput <= props.valueStartInput || props.valueStartInput < 0) {
@@ -77,15 +52,16 @@ export const CounterSettingsField = (props: CounterSettingsFieldPropsType) => {
         }
     }, [props.valueMaxInput, props.valueStartInput, props.valueStartInput]);
 
+    // console.log(props.valueStartInput)
 
     const saveOnExitFromInput = (e: React.ChangeEvent<HTMLInputElement>) => {
         if (e.target.name === 'start value:') {
-            props.setIntermediateValueStartInput(Number(e.target.value))
+            //  props.setIntermediateValueStartInput(Number(e.target.value))
         }
         props.setIsClickedButtonSet(true)
     }
 
-    const conditionOne = (valueInput) < 0
+    const conditionOne = (props.valueMaxInput) < 0 || (props.valueStartInput) <0
     const conditionTwo = props.valueMaxInput <= props.valueStartInput
 
     const wrapperClass = conditionOne || conditionTwo ? s.errorInput : ''
@@ -96,7 +72,7 @@ export const CounterSettingsField = (props: CounterSettingsFieldPropsType) => {
             <span>{props.title}</span>
             <input
                 className={wrapperClass}
-                type="number" name={props.title} value={valueInput} onChange={onChangeHandler}
+                type="number" name={props.title} value={props.valueInput} onChange={onChangeHandler}
                 onBlur={saveOnExitFromInput}
             />
         </div>

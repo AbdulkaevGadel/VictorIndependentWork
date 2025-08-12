@@ -7,7 +7,10 @@ type PropsCountContent = {
 
 
 export const CountContent = (props:PropsCountContent) => {
+
+    const wrapperClass = Number(props.count) > props.maxValue -1 ? s.maxCount : s.normal
+
     return (
-        <span className={Number(props.count) > props.maxValue -1 ? s.maxCount : s.normal}>{props.count}</span>
+        <span className={wrapperClass}>{props.count}</span>
     );
 };
