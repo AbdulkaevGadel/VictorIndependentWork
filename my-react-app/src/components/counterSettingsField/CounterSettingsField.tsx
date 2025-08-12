@@ -4,28 +4,16 @@ import React, {type Dispatch, type SetStateAction} from "react";
 type CounterSettingsFieldPropsType = {
     title: string,
     valueInput: number
-    maxValue?: number
-    startValue: number
     setValueMaxInput?: Dispatch<SetStateAction<number>>
-    valueMaxInput: number
-    valueStartInput: number
     setValueStartInput?: Dispatch<SetStateAction<number>>
-    setFlagDisabledButton: Dispatch<SetStateAction<boolean>>
-    setCount: Dispatch<SetStateAction<string>>
-    count?: string
-    flagDisabledButton: boolean
-    intermediateValueStartInput?: number
-    setIntermediateValueStartInput?: Dispatch<SetStateAction<number>>
     setIsClickedButtonSet: Dispatch<SetStateAction<boolean>>
     onChangeHandlerStartValue?: (e: React.ChangeEvent<HTMLInputElement>) => void
     onChangeHandlerMaxValue?: (e: React.ChangeEvent<HTMLInputElement>) => void
+    wrapperClass: string
 }
 
 
 export const CounterSettingsField = (props: CounterSettingsFieldPropsType) => {
-
-    // const [valueInput, setValueInput] = useState(props.valueInput)
-
 
     const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
         props.setIsClickedButtonSet(true)
@@ -42,34 +30,12 @@ export const CounterSettingsField = (props: CounterSettingsFieldPropsType) => {
     }
 
 
-    // useLayoutEffect(() => {
-    //     if (props.valueMaxInput <= props.valueStartInput || props.valueStartInput < 0) {
-    //         props.setCount(incorrectValue)
-    //     }
-    // }, [props.valueMaxInput, props.valueStartInput, props.valueStartInput]);
-
-    // console.log(props.valueStartInput)
-
-    const saveOnExitFromInput = (e: React.ChangeEvent<HTMLInputElement>) => {
-        if (e.target.name === 'start value:') {
-            //  props.setIntermediateValueStartInput(Number(e.target.value))
-        }
-
-    }
-
-    const conditionOne = (props.valueMaxInput) < 0 || (props.valueStartInput) < 0
-    const conditionTwo = props.valueMaxInput <= props.valueStartInput
-
-    const wrapperClass = conditionOne || conditionTwo ? s.errorInput : ''
-
-
     return (
         <div className={s.counter}>
             <span>{props.title}</span>
             <input
-                className={wrapperClass}
+                className={props.wrapperClass}
                 type="number" name={props.title} value={props.valueInput} onChange={onChangeHandler}
-                onBlur={saveOnExitFromInput}
             />
         </div>
     );

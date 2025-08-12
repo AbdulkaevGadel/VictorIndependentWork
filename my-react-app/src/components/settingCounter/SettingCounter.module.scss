@@ -13,6 +13,14 @@
 
 }
 
+.errorInput {
+  border: 3px solid red;
+  &:focus {
+    outline: 3px solid red;
+    border-color: red;
+    box-shadow: 0 0 8px rgba(red, 0.4);
+  }
+}
 
 
 

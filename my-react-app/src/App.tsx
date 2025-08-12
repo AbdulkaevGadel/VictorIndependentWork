@@ -25,10 +25,15 @@ function App() {
 
     return (
         <div className={s.appMain}>
-            <SettingCounter setCountSettings={setCountSettings} count={count} setCount={setCount}
-                            maxValue={countSettings.maxValue} startValue={countSettings.startValue}
-                            isClickedButtonSet={isClickedButtonSet} setIsClickedButtonSet={setIsClickedButtonSet}/>
-            <Counter count={count} setCount={setCount} maxValue={countSettings.maxValue}
+            <SettingCounter setCountSettings={setCountSettings}
+                            setCount={setCount}
+                            maxValue={countSettings.maxValue}
+                            startValue={countSettings.startValue}
+                            isClickedButtonSet={isClickedButtonSet}
+                            setIsClickedButtonSet={setIsClickedButtonSet}/>
+            <Counter count={count}
+                     setCount={setCount}
+                     maxValue={countSettings.maxValue}
                      startValue={countSettings.startValue}
                      isClickedButtonSet={isClickedButtonSet}/>
         </div>
@@ -37,7 +42,3 @@ function App() {
 
 export default App
 
-////  КоунтерСетингФилд сделать простым, без стэйта и логики ( разделить логику на два и вынести выше)
-///  интермедиа выпилили(логику перенести)
-//// задизейэблить reset при стартовом значение +
-/// Икноред покрасить в красный 

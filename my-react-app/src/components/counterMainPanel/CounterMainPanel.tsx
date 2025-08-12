@@ -6,7 +6,7 @@ type CounterMainPanelProps = {
     children?: ReactNode;
 }
 
-export const CounterMainPanel = ({children}:CounterMainPanelProps) => {
+export const CounterMainPanel = ({children}: CounterMainPanelProps) => {
 
     const count = Children.count(children);
 

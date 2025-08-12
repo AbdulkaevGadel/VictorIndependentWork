@@ -1,12 +1,9 @@
 @use '@styles/variables' as v;
 
 .counter {
-  //max-width: 300px;
   border: 3px solid v.$primary;
   border-radius: 10px;
   padding: 20px;
-  //margin-top: 50px;
-  //margin-left: 50px;
   color: v.$primary;
   display: flex;
   flex-direction: column;
