@@ -1,5 +1,5 @@
 import s from "./CounterSettingsField.module.scss"
-import React, {type Dispatch, type SetStateAction, useLayoutEffect} from "react";
+import React, {type Dispatch, type SetStateAction} from "react";
 
 type CounterSettingsFieldPropsType = {
     title: string,
@@ -26,11 +26,9 @@ export const CounterSettingsField = (props: CounterSettingsFieldPropsType) => {
 
     // const [valueInput, setValueInput] = useState(props.valueInput)
 
-    const incorrectValue: string = 'Incorrect value!'
-    const enterValue: string = 'Enter value and press "set"'
 
     const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-
+        props.setIsClickedButtonSet(true)
         if (e.target.name === 'max value:') {
             props.setValueMaxInput?.(Number(e.target.value))
             props.onChangeHandlerMaxValue?.(e)
@@ -44,13 +42,11 @@ export const CounterSettingsField = (props: CounterSettingsFieldPropsType) => {
     }
 
 
-
-
-    useLayoutEffect(() => {
-        if (props.valueMaxInput <= props.valueStartInput || props.valueStartInput < 0) {
-            props.setCount(incorrectValue)
-        }
-    }, [props.valueMaxInput, props.valueStartInput, props.valueStartInput]);
+    // useLayoutEffect(() => {
+    //     if (props.valueMaxInput <= props.valueStartInput || props.valueStartInput < 0) {
+    //         props.setCount(incorrectValue)
+    //     }
+    // }, [props.valueMaxInput, props.valueStartInput, props.valueStartInput]);
 
     // console.log(props.valueStartInput)
 
@@ -58,10 +54,10 @@ export const CounterSettingsField = (props: CounterSettingsFieldPropsType) => {
         if (e.target.name === 'start value:') {
             //  props.setIntermediateValueStartInput(Number(e.target.value))
         }
-        props.setIsClickedButtonSet(true)
+
     }
 
-    const conditionOne = (props.valueMaxInput) < 0 || (props.valueStartInput) <0
+    const conditionOne = (props.valueMaxInput) < 0 || (props.valueStartInput) < 0
     const conditionTwo = props.valueMaxInput <= props.valueStartInput
 
     const wrapperClass = conditionOne || conditionTwo ? s.errorInput : ''

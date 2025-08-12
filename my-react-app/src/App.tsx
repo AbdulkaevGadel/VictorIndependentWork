@@ -16,13 +16,11 @@ function App() {
         maxValue: 4,
         startValue: 0
     })
+    const [isClickedButtonSet, setIsClickedButtonSet] = useState(false)
 
     useLayoutEffect(() => {
         setCount(String(countSettings.startValue))
     }, [countSettings.startValue]);
-
-
-    const [isClickedButtonSet, setIsClickedButtonSet] = useState(false)
 
 
     return (
