@@ -16,7 +16,7 @@ function App() {
         maxValue: 4,
         startValue: 0
     })
-    const [isClickedButtonSet, setIsClickedButtonSet] = useState(false)
+    const [flagDisabledButton, seFlagDisabledButton] = useState(false)
 
     useLayoutEffect(() => {
         setCount(String(countSettings.startValue))
@@ -29,13 +29,13 @@ function App() {
                             setCount={setCount}
                             maxValue={countSettings.maxValue}
                             startValue={countSettings.startValue}
-                            isClickedButtonSet={isClickedButtonSet}
-                            setIsClickedButtonSet={setIsClickedButtonSet}/>
+                            flagDisabledButton={flagDisabledButton}
+                            seFlagDisabledButton={seFlagDisabledButton}/>
             <Counter count={count}
                      setCount={setCount}
                      maxValue={countSettings.maxValue}
                      startValue={countSettings.startValue}
-                     isClickedButtonSet={isClickedButtonSet}/>
+                     flagDisabledButton={flagDisabledButton}/>
         </div>
     )
 }

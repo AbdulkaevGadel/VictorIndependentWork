@@ -6,7 +6,7 @@ type CounterSettingsFieldPropsType = {
     valueInput: number
     setValueMaxInput?: Dispatch<SetStateAction<number>>
     setValueStartInput?: Dispatch<SetStateAction<number>>
-    setIsClickedButtonSet: Dispatch<SetStateAction<boolean>>
+    seFlagDisabledButton: Dispatch<SetStateAction<boolean>>
     onChangeHandlerStartValue?: (e: React.ChangeEvent<HTMLInputElement>) => void
     onChangeHandlerMaxValue?: (e: React.ChangeEvent<HTMLInputElement>) => void
     wrapperClass: string
@@ -16,7 +16,7 @@ type CounterSettingsFieldPropsType = {
 export const CounterSettingsField = (props: CounterSettingsFieldPropsType) => {
 
     const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-        props.setIsClickedButtonSet(true)
+        props.seFlagDisabledButton(true)
         if (e.target.name === 'max value:') {
             props.setValueMaxInput?.(Number(e.target.value))
             props.onChangeHandlerMaxValue?.(e)

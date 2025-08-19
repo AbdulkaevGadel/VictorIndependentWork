@@ -11,7 +11,7 @@ type CounterMainPanelProps = {
     maxValue: number
     startValue: number
     setCount: Dispatch<SetStateAction<string>>
-    isClickedButtonSet: boolean
+    flagDisabledButton: boolean
 }
 
 export const Counter = (props: CounterMainPanelProps) => {
@@ -25,8 +25,8 @@ export const Counter = (props: CounterMainPanelProps) => {
         props.setCount(String(props.startValue))
     }
 
-    const conditionForDisabledInc = Number(props.count) > props.maxValue - 1 || props.isClickedButtonSet
-    const conditionForDisabledReset = Number(props.count) === props.startValue || props.isClickedButtonSet
+    const conditionForDisabledInc = Number(props.count) > props.maxValue - 1 || props.flagDisabledButton
+    const conditionForDisabledReset = Number(props.count) === props.startValue || props.flagDisabledButton
 
 
     return (

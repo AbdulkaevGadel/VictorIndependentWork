@@ -6,7 +6,7 @@ type PropsButton = {
     title: string
     onClick: (count?: number) => void
     disabled: boolean
-    setIsClickedButtonSet?: Dispatch<SetStateAction<boolean>>
+    seFlagDisabledButton?: Dispatch<SetStateAction<boolean>>
     setCount?: Dispatch<SetStateAction<string>>
     valueStartInput?: number
 }
@@ -16,7 +16,7 @@ export const Button = (props: PropsButton) => {
 
     const onClickHandler = () => {
         props.onClick()
-        props.setIsClickedButtonSet?.(false)
+        props.seFlagDisabledButton?.(false)
         props.setCount?.(String(props.valueStartInput))
     }
 
