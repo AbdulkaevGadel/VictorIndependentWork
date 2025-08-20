@@ -1,4 +1,4 @@
-import {useLayoutEffect, useState} from 'react'
+import {useEffect, useLayoutEffect, useState} from 'react'
 import {Counter} from "./components/counter/Counter.tsx";
 import {SettingCounter} from "./components/settingCounter/SettingCounter.tsx";
 import s from "./App.module.scss"
@@ -17,6 +17,12 @@ function App() {
         startValue: 0
     })
     const [flagDisabledButton, seFlagDisabledButton] = useState(false)
+
+    // useEffect(() => {
+    //     if(localStorage.length === 0){
+    //         localStorage.setItem('counter', JSON.stringify({ count: 5 }));
+    //     }
+    // }, []);
 
     useLayoutEffect(() => {
         setCount(String(countSettings.startValue))

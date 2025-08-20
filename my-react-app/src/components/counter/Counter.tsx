@@ -16,6 +16,8 @@ type CounterMainPanelProps = {
 
 export const Counter = (props: CounterMainPanelProps) => {
 
+
+
     const handleIncrement = () => {
         const newCount = Number(props.count) + 1;
         props.setCount(String(newCount))
@@ -25,8 +27,9 @@ export const Counter = (props: CounterMainPanelProps) => {
         props.setCount(String(props.startValue))
     }
 
-    const conditionForDisabledInc = Number(props.count) > props.maxValue - 1 || props.flagDisabledButton
-    const conditionForDisabledReset = Number(props.count) === props.startValue || props.flagDisabledButton
+    const conditionForDisabledInc = Number(props.count) > props.maxValue - 1 || props.flagDisabledButton || isNaN(Number(props.count))
+    const conditionForDisabledReset = Number(props.count) === props.startValue || props.flagDisabledButton || isNaN(Number(props.count))
+
 
 
     return (
