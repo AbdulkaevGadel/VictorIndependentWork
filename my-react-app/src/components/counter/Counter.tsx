@@ -1,41 +1,42 @@
-import type {Dispatch, SetStateAction} from "react";
 import s from "./Counter.module.scss"
 import {CounterMainPanel} from "../counterMainPanel/CounterMainPanel.tsx";
 import {CountContent} from "../countContent/CountContent.tsx";
 import {CounterActions} from "../counterActions/CounterActions.tsx";
 import {Button} from "../button/Button.tsx";
+import {useAppSelector} from "../../common/hooks/useAppSelector.ts";
+import {selectCount, selectFlagDisabledButton} from "../../store/selectors/selectorsCounterValue.ts";
+import {useAppDispatch} from "../../common/hooks/useAppDispatch.ts";
+import {setCountAC} from "../../store/reducers/counter-reducer.ts";
 
 
 type CounterMainPanelProps = {
-    count: string
     maxValue: number
     startValue: number
-    setCount: Dispatch<SetStateAction<string>>
-    flagDisabledButton: boolean
 }
 
 export const Counter = (props: CounterMainPanelProps) => {
 
-
+    const count = useAppSelector(selectCount)
+    const flagDisabledButton = useAppSelector(selectFlagDisabledButton)
+    const dispatch = useAppDispatch()
 
     const handleIncrement = () => {
-        const newCount = Number(props.count) + 1;
-        props.setCount(String(newCount))
+        const newCount = Number(count) + 1;
+        dispatch(setCountAC(String(newCount)))
     }
 
     const resetCounter = () => {
-        props.setCount(String(props.startValue))
+        dispatch(setCountAC(String(props.startValue)))
     }
 
-    const conditionForDisabledInc = Number(props.count) > props.maxValue - 1 || props.flagDisabledButton || isNaN(Number(props.count))
-    const conditionForDisabledReset = Number(props.count) === props.startValue || props.flagDisabledButton || isNaN(Number(props.count))
-
+    const conditionForDisabledInc = Number(count) > props.maxValue - 1 || flagDisabledButton || isNaN(Number(count))
+    const conditionForDisabledReset = Number(count) === props.startValue || flagDisabledButton || isNaN(Number(count))
 
 
     return (
         <div className={s.counter}>
             <CounterMainPanel>
-                <CountContent count={props.count} maxValue={props.maxValue}/>
+                <CountContent count={count} maxValue={props.maxValue}/>
             </CounterMainPanel>
             <CounterActions>
                 <Button title={'inc'}

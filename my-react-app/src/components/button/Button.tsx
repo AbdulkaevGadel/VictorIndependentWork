@@ -1,14 +1,13 @@
 import s from './Button.module.scss'
-import type {Dispatch, SetStateAction} from "react";
 
 
 type PropsButton = {
     title: string
     onClick: (count?: number) => void
     disabled: boolean
-    seFlagDisabledButton?: Dispatch<SetStateAction<boolean>>
-    setCount?: Dispatch<SetStateAction<string>>
-    valueStartInput?: number
+    seFlagDisabledButton?: (flag: boolean) => void
+    setCount?: (count: string) => void
+    startValue?: number
 }
 
 
@@ -17,7 +16,7 @@ export const Button = (props: PropsButton) => {
     const onClickHandler = () => {
         props.onClick()
         props.seFlagDisabledButton?.(false)
-        props.setCount?.(String(props.valueStartInput))
+        props.setCount?.(String(props.startValue))
     }
 
     return (
