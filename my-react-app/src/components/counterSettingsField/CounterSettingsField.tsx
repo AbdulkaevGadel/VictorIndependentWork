@@ -13,13 +13,9 @@ type CounterSettingsFieldPropsType = {
 
 
 export const CounterSettingsField = (props: CounterSettingsFieldPropsType) => {
-    // console.log(props.valueInput)
-    console.log('render')
+
     const [valueInput, setValueInput] = useState(props.valueInput)
-
     const dispatch = useAppDispatch()
-    console.log(valueInput)
-
 
     const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
         dispatch(setFlagDisabledButtonAC(true))
