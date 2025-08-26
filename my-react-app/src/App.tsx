@@ -4,14 +4,11 @@ import s from "./App.module.scss"
 import {useAppDispatch} from "./common/hooks/useAppDispatch.ts";
 import {useAppSelector} from "./common/hooks/useAppSelector.ts";
 import {selectMaxValue, selectStartValue} from "./store/selectors/selectorsCounterValue.ts";
-import {useEffect} from "react";
-import {setMaxValueAC, setStartValueAC} from "./store/reducers/counter-reducer.ts";
+import {useEffect, useLayoutEffect} from "react";
+import {setCountAC, setMaxValueAC, setStartValueAC} from "./store/reducers/counter-reducer.ts";
+import {type CountSettingsType, useLocalStorage} from "./customHooks/useLocalStorage.ts";
 
-export type CountSettingsType = {
-    maxValue: number
-    startValue: number
 
-}
 
 
 function App() {
@@ -28,20 +25,16 @@ function App() {
     //     startValue: 0
     // })
     // const [flagDisabledButton, seFlagDisabledButton] = useState(false)
-
+    // console.log(countSettings)
 
     // useEffect(() => {
-    //     const counterData = localStorage.getItem('counter');
-    //     if (counterData !== null) {
-    //         const counter: CountSettingsType = JSON.parse(counterData);
-    //         const maxValue = counter.maxValue
-    //         const startValue = counter.startValue
+    //     if (countSettings !== null) {
     //         console.log(maxValue)
     //         console.log(startValue)
-    //         dispatch(setMaxValueAC(maxValue))
-    //         dispatch(setStartValueAC(startValue))
+    //         dispatch(setMaxValueAC(countSettings.maxValue))
+    //         dispatch(setStartValueAC(countSettings.startValue))
     //     }
-    // }, []);
+    // }, [dispatch, countSettings, startValue]);
 
     // useEffect(() => {
     //         localStorage.setItem('counter', JSON.stringify({
@@ -51,9 +44,7 @@ function App() {
     //
     // }, [maxValue, startValue]);
 
-    // useLayoutEffect(() => {
-    //     setCount(String(startValue))
-    // }, [startValue]);
+
 
 
     return (
@@ -61,6 +52,7 @@ function App() {
             <SettingCounter
                 maxValue={maxValue}
                 startValue={startValue}
+                // setCountSettings = {setCountSettings}
             />
             <Counter
                 maxValue={maxValue}

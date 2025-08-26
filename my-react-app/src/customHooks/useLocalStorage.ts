@@ -1,5 +1,10 @@
 import {useState, useEffect} from 'react';
-import type {CountSettingsType} from "../App.tsx";
+
+export type CountSettingsType = {
+    maxValue: number
+    startValue: number
+
+}
 
 export function useLocalStorage<T>(key: string, initialValue: T):
     [CountSettingsType, (value: (((prevState: CountSettingsType) => CountSettingsType) | CountSettingsType)) => void] {

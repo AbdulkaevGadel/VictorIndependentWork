@@ -20,6 +20,7 @@ export const CounterSettingsField = (props: CounterSettingsFieldPropsType) => {
     const dispatch = useAppDispatch()
     console.log(valueInput)
 
+
     const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
         dispatch(setFlagDisabledButtonAC(true))
         if (e.target.name === 'max value:') {

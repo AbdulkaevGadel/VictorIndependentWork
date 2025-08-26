@@ -3,7 +3,7 @@ import {CounterActions} from "../counterActions/CounterActions.tsx";
 import {Button} from "../button/Button.tsx";
 import {CounterSettingsField} from "../counterSettingsField/CounterSettingsField.tsx";
 import s from "./SettingCounter.module.scss"
-import React, {useLayoutEffect} from "react";
+import React, {type Dispatch, type SetStateAction, useLayoutEffect} from "react";
 import {useAppDispatch} from "../../common/hooks/useAppDispatch.ts";
 import {
     setCountAC,
@@ -13,10 +13,12 @@ import {
 } from "../../store/reducers/counter-reducer.ts";
 import {useAppSelector} from "../../common/hooks/useAppSelector.ts";
 import {selectFlagDisabledButton} from "../../store/selectors/selectorsCounterValue.ts";
+import type {CountSettingsType} from "../../customHooks/useLocalStorage.ts";
 
 type SettingCounterPropsType = {
     maxValue: number
     startValue: number
+    // setCountSettings: Dispatch<SetStateAction<CountSettingsType>>
 }
 
 
@@ -44,18 +46,18 @@ export const SettingCounter = (props: SettingCounterPropsType) => {
         console.log(props.startValue)
         dispatch(setMaxValueAC(props.maxValue))
         dispatch(setStartValueAC(props.startValue))
-        // localStorage.setItem('counter', JSON.stringify({
-        //     maxValue: props.maxValue,
-        //     startValue: props.startValue,
-        // }))
+        // props.setCountSettings(prevState => ({ ...prevState, maxValue: props.maxValue, startValue: props.startValue }))
         dispatch(setCountAC(String(props.startValue)))
     }
+    console.log(props.startValue + 'mne')
 
     useLayoutEffect(() => {
+
         if (props.maxValue <= props.startValue || props.startValue < 0) {
             dispatch(setFlagDisabledButtonAC(true))
             dispatch(setCountAC(incorrectValue))
-        }
+        } else dispatch(setFlagDisabledButtonAC(false))
+          // dispatch(setCountAC(String(props.startValue)))
     }, [props.maxValue, props.startValue]);
 
 
@@ -71,9 +73,9 @@ export const SettingCounter = (props: SettingCounterPropsType) => {
 
     const onChangeHandlerStartValue = (e: React.ChangeEvent<HTMLInputElement>) => {
         dispatch(setStartValueAC(Number(e.currentTarget.value)))
-        if (props.startValue < 0) {
-            dispatch(setFlagDisabledButtonAC(true))
-        } else dispatch(setFlagDisabledButtonAC(false))
+        // if (props.startValue < 0) {
+        //     dispatch(setFlagDisabledButtonAC(true))
+        // } else dispatch(setFlagDisabledButtonAC(false))
         dispatch(setCountAC(enterValue))
     }
 
@@ -84,6 +86,10 @@ export const SettingCounter = (props: SettingCounterPropsType) => {
     const seFlagDisabledButton = (flag: boolean) => {
         dispatch(setFlagDisabledButtonAC(flag))
     }
+
+    // useLayoutEffect(() => {
+    //
+    // }, [props.startValue]);
 
     return (
         <div className={s.settingCounter}>
