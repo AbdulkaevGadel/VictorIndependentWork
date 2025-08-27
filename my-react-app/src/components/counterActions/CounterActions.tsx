@@ -1,9 +1,7 @@
 import s from './CounterActions.module.scss';
-import {Children, type ReactNode} from "react";
+import {Children} from "react";
+import type {CounterActionsProps} from "./counterActionsTypes.ts";
 
-type CounterActionsProps = {
-    children: ReactNode;
-}
 
 export const CounterActions = ({children}: CounterActionsProps) => {
 

@@ -1,15 +1,8 @@
 import s from "./CounterSettingsField.module.scss"
 import React, {useState} from "react";
-import {useAppDispatch} from "../../common/hooks/useAppDispatch.ts";
-import {setFlagDisabledButtonAC} from "../../store/reducers/counter-reducer.ts";
-
-type CounterSettingsFieldPropsType = {
-    title: string,
-    valueInput: number
-    onChangeHandlerStartValue?: (e: React.ChangeEvent<HTMLInputElement>) => void
-    onChangeHandlerMaxValue?: (e: React.ChangeEvent<HTMLInputElement>) => void
-    wrapperClass: string
-}
+import {useAppDispatch} from "../../common/customHooks/useAppDispatch.ts";
+import {setFlagDisabledButtonAC} from "../../store/actions/counter-action-creators.ts";
+import type {CounterSettingsFieldPropsType} from "./CounterSettingsFieldTypes.ts";
 
 
 export const CounterSettingsField = (props: CounterSettingsFieldPropsType) => {

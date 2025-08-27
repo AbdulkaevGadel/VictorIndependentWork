@@ -1,10 +1,7 @@
 import s from "./CounterMainPanel.module.scss";
-import {Children, type ReactNode} from "react";
+import {Children} from "react";
+import type {CounterMainPanelProps} from "./counterMainPanelTypes.ts";
 
-
-type CounterMainPanelProps = {
-    children?: ReactNode;
-}
 
 export const CounterMainPanel = ({children}: CounterMainPanelProps) => {
 

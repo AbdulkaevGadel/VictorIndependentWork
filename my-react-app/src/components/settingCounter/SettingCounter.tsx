@@ -4,20 +4,16 @@ import {Button} from "../button/Button.tsx";
 import {CounterSettingsField} from "../counterSettingsField/CounterSettingsField.tsx";
 import s from "./SettingCounter.module.scss"
 import React, {useLayoutEffect} from "react";
-import {useAppDispatch} from "../../common/hooks/useAppDispatch.ts";
+import {useAppDispatch} from "../../common/customHooks/useAppDispatch.ts";
+import {useAppSelector} from "../../common/customHooks/useAppSelector.ts";
+import {selectFlagDisabledButton} from "../../store/selectors/selectorsCounterValue.ts";
 import {
     setCountAC,
     setFlagDisabledButtonAC,
     setMaxValueAC,
     setStartValueAC
-} from "../../store/reducers/counter-reducer.ts";
-import {useAppSelector} from "../../common/hooks/useAppSelector.ts";
-import {selectFlagDisabledButton} from "../../store/selectors/selectorsCounterValue.ts";
-
-type SettingCounterPropsType = {
-    maxValue: number
-    startValue: number
-}
+} from "../../store/actions/counter-action-creators.ts";
+import type {SettingCounterPropsType} from "./SettingCounterTypes.ts";
 
 
 export const SettingCounter = (props: SettingCounterPropsType) => {
@@ -45,7 +41,6 @@ export const SettingCounter = (props: SettingCounterPropsType) => {
         dispatch(setStartValueAC(props.startValue))
         dispatch(setCountAC(String(props.startValue)))
     }
-    console.log(props.startValue + 'mne')
 
     useLayoutEffect(() => {
 
@@ -54,7 +49,6 @@ export const SettingCounter = (props: SettingCounterPropsType) => {
             dispatch(setCountAC(incorrectValue))
         } else dispatch(setFlagDisabledButtonAC(false))
     }, [props.maxValue, props.startValue]);
-
 
 
     const onChangeHandlerMaxValue = (e: React.ChangeEvent<HTMLInputElement>) => {

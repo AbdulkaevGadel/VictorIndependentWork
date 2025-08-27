@@ -1,9 +1,7 @@
 import s from "./CountContent.module.scss";
+import type {PropsCountContent} from "./countContentTypes.ts";
 
-type PropsCountContent = {
-    count: string
-    maxValue: number
-}
+
 
 
 export const CountContent = (props: PropsCountContent) => {

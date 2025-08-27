@@ -1,7 +1,7 @@
 import {Counter} from "./components/counter/Counter.tsx";
 import {SettingCounter} from "./components/settingCounter/SettingCounter.tsx";
 import s from "./App.module.scss"
-import {useAppSelector} from "./common/hooks/useAppSelector.ts";
+import {useAppSelector} from "./common/customHooks/useAppSelector.ts";
 import {selectMaxValue, selectStartValue} from "./store/selectors/selectorsCounterValue.ts";
 
 

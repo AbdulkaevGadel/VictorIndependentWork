@@ -1,26 +1,8 @@
-import {createAction, createReducer} from "@reduxjs/toolkit";
+import {createReducer} from "@reduxjs/toolkit";
+import {setCountAC, setFlagDisabledButtonAC, setMaxValueAC, setStartValueAC} from "../actions/counter-action-creators.ts";
+import type {CounterTypes} from "../types/counterTypes.ts";
 
-export type Counter = {
-    count: string
-    maxValue: number
-    startValue: number
-    flagDisabledButton: boolean
-}
-
-export const setCountAC =
-    createAction<Counter['count']>('SET_COUNTER/COUNTER_REDUCER')
-export const setMaxValueAC =
-    createAction<number>('SET_MAX_VALUE/COUNTER_REDUCER')
-export const setStartValueAC =
-    createAction<Counter['startValue']>('SET_START_VALUE/COUNTER_REDUCER')
-export const setFlagDisabledButtonAC =
-    createAction<Counter['flagDisabledButton']>('SET_FLAG_DISABLED_BUTTON/COUNTER_REDUCER')
-
-
-export type CounterState = Counter
-
-
-const initialState: CounterState = {
+const initialState: CounterTypes = {
     count: "0",
     maxValue: 1,
     startValue: 0,
@@ -34,7 +16,6 @@ export const counterReducer = createReducer(initialState, builder => {
             state.count = action.payload
         })
         .addCase(setMaxValueAC, (state, action) => {
-            // console.log('zawel')
             state.maxValue = action.payload
         })
         .addCase(setStartValueAC, (state, action) => {

@@ -3,16 +3,13 @@ import {CounterMainPanel} from "../counterMainPanel/CounterMainPanel.tsx";
 import {CountContent} from "../countContent/CountContent.tsx";
 import {CounterActions} from "../counterActions/CounterActions.tsx";
 import {Button} from "../button/Button.tsx";
-import {useAppSelector} from "../../common/hooks/useAppSelector.ts";
+import {useAppSelector} from "../../common/customHooks/useAppSelector.ts";
 import {selectCount, selectFlagDisabledButton} from "../../store/selectors/selectorsCounterValue.ts";
-import {useAppDispatch} from "../../common/hooks/useAppDispatch.ts";
-import {setCountAC} from "../../store/reducers/counter-reducer.ts";
+import {useAppDispatch} from "../../common/customHooks/useAppDispatch.ts";
+import {setCountAC} from "../../store/actions/counter-action-creators.ts";
+import type {CounterMainPanelProps} from "./counterTypes.ts";
 
 
-type CounterMainPanelProps = {
-    maxValue: number
-    startValue: number
-}
 
 export const Counter = (props: CounterMainPanelProps) => {
 

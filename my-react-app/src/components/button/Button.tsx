@@ -1,14 +1,5 @@
 import s from './Button.module.scss'
-
-
-type PropsButton = {
-    title: string
-    onClick: (count?: number) => void
-    disabled: boolean
-    seFlagDisabledButton?: (flag: boolean) => void
-    setCount?: (count: string) => void
-    startValue?: number
-}
+import type {PropsButton} from "./buttonTypes.ts";
 
 
 export const Button = (props: PropsButton) => {
