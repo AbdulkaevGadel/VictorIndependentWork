@@ -3,7 +3,7 @@ import {CounterActions} from "../counterActions/CounterActions.tsx";
 import {Button} from "../button/Button.tsx";
 import {CounterSettingsField} from "../counterSettingsField/CounterSettingsField.tsx";
 import s from "./SettingCounter.module.scss"
-import React, {useLayoutEffect} from "react";
+import React, {useEffect} from "react";
 import {useAppDispatch} from "../../common/customHooks/useAppDispatch.ts";
 import {useAppSelector} from "../../common/customHooks/useAppSelector.ts";
 import {selectFlagDisabledButton} from "../../store/selectors/selectorsCounterValue.ts";
@@ -21,7 +21,6 @@ export const SettingCounter = (props: SettingCounterPropsType) => {
     const flagDisabledButton = useAppSelector(selectFlagDisabledButton)
 
     const dispatch = useAppDispatch()
-    console.log("settingCounter", props.maxValue)
 
     const incorrectValue: string = 'Incorrect value!'
     const enterValue: string = 'Enter value and press "set"'
@@ -33,6 +32,13 @@ export const SettingCounter = (props: SettingCounterPropsType) => {
 
     const wrapperClass = conditionOne || conditionTwo ? s.errorInput : ''
 
+    useEffect(() => {
+
+        if (props.maxValue <= props.startValue || props.startValue < 0) {
+            dispatch(setFlagDisabledButtonAC(true))
+            dispatch(setCountAC(incorrectValue))
+        } else dispatch(setFlagDisabledButtonAC(false))
+    }, [props.maxValue, props.startValue]);
 
     const saveCounterSettings = () => {
         console.log(props.maxValue)
@@ -41,15 +47,6 @@ export const SettingCounter = (props: SettingCounterPropsType) => {
         dispatch(setStartValueAC(props.startValue))
         dispatch(setCountAC(String(props.startValue)))
     }
-
-    useLayoutEffect(() => {
-
-        if (props.maxValue <= props.startValue || props.startValue < 0) {
-            dispatch(setFlagDisabledButtonAC(true))
-            dispatch(setCountAC(incorrectValue))
-        } else dispatch(setFlagDisabledButtonAC(false))
-    }, [props.maxValue, props.startValue]);
-
 
     const onChangeHandlerMaxValue = (e: React.ChangeEvent<HTMLInputElement>) => {
         dispatch(setMaxValueAC(Number(e.currentTarget.value)))
